@@ -7,7 +7,7 @@
 //
 //  TODO:
 //  - cleanup viewing, some var names too...
-//  - implement move restrictions(?), undo function(?)
+//  - implement move restrictions(?)
 
 import Foundation
 
@@ -29,6 +29,8 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
     private var finishState: DesiredState!
     private var opDirections: OperationOrientation!
     private var gameState: GameState?
+    private var previousGameState: GameState?   // only record the last one, undos are only allowed once, subject to change
+    private var undoAvailable: Bool = false
     private var active = false // whether or not the game has started, once set to true, some functions are allowed/restricted
     
     var levelName: String
@@ -209,11 +211,26 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
     {
         if active
         {
+            previousGameState = gameState
+            if previousGameState != nil
+            {
+                undoAvailable = true
+            }
             let move = performManipulation(index: rowIndex, manipulation: action, withExtraParam: numIndex)
             updateGameState(moves: move)
         }
         return state
         
+    }
+    
+    func undo() -> GameState?
+    {
+        if undoAvailable
+        {
+            gameState = previousGameState
+            undoAvailable = false
+        }
+        return state
     }
     
     private func updateGameState(moves: Int)
