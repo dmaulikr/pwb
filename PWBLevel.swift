@@ -6,10 +6,8 @@
 //  Copyright © 2017 Nicholas Wei. All rights reserved.
 //
 //  TODO:
-//  - test top, left, and right orientation to ensure operations/answers work
-//  - test bottom orientation xor func; rest confirmed to work
 //  - cleanup viewing, some var names too...
-//  - implement move restrictions(?)
+//  - implement move restrictions(?), undo function(?)
 
 import Foundation
 
@@ -78,9 +76,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         var stateSize: Int    // size of the currentState
         var moves: Int  // total number of "moves" performed
         var completed: Bool
-        
         // let manipulationResult: AnyObject?  // result of any operations performed as a result of the last performManipulation() if applicable
-        
     }
     
     struct DesiredState // represents the goal to the problem, all bits are represented as BitWrappers, there are 8 desired states possible (minimum one required)
@@ -92,10 +88,8 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         
         // var topRightState: BitWrapper?
         // var bottomRightState: BitWrapper?
-        
         // var topLeftState: BitWrapper?
         // var bottomLeftState: BitWrapper?
-        
     }
     
     private struct OperationOrientation
@@ -186,6 +180,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             case "add" : opDirections.right = BitWrapper.selfAdd
             case "or" : opDirections.right = BitWrapper.selfOr
             case "and" : opDirections.right = BitWrapper.selfAnd
+            case "xor" : opDirections.right = BitWrapper.selfOr
             default : return 1
             }
         }
@@ -196,6 +191,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             case "add" : opDirections.left = BitWrapper.selfAdd
             case "or" : opDirections.left = BitWrapper.selfOr
             case "and" : opDirections.left = BitWrapper.selfAnd
+            case "xor" : opDirections.left = BitWrapper.selfOr
             default : return 1
             }
         }

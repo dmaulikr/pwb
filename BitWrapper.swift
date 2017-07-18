@@ -6,7 +6,6 @@
 //  Copyright © 2017 Nicholas Wei. All rights reserved.
 //
 //  TODO:
-//  - turn flip/constFlip into single function
 //  - cleanup viewing (put public functions/properties above internal implementation details)
 
 import Foundation
@@ -74,7 +73,7 @@ class BitWrapper    // class to represent binary numbers for easy manipulations 
         binary = Array(String(repeating: "0", count: num).characters) + binary
     }
     
-    private func constFlip(index: Int)  // flips the bit solely and returns the previous bit
+    func flip(index: Int) // flips the bit
     {
         if let bit = binary?[index]
         {
@@ -87,13 +86,6 @@ class BitWrapper    // class to represent binary numbers for easy manipulations 
                 binary[index] = "0"
             }
         }
-        
-    }
-    
-    func flip(index: Int) // flips the bit and removes leading 0s if needed
-    {
-        constFlip(index: index)
-        // removeLeadingZeros()
     }
     
     func shiftLeft()
@@ -150,12 +142,21 @@ class BitWrapper    // class to represent binary numbers for easy manipulations 
         return BitWrapper(fromNum: 0)
     }
     
+    static func selfXor(fromBit: BitWrapper) -> BitWrapper  // XORs the bit as if each bit was independent
+    {
+        if (fromBit.binary.filter{$0 == "1"}.count % 2) == 0    // even number of 1s, result should be 0
+        {
+            return BitWrapper(fromNum: 0)
+        }
+        return BitWrapper(fromNum: 1)
+    }
+    
     func selfNot()   // NOTs the bits modifies original self
     {
         
         for i in 0..<binary.count
         {
-            constFlip(index: i)
+            self.flip(index: i)
         }
         // removeLeadingZeros()
     }
