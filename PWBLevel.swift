@@ -81,7 +81,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         // let manipulationResult: AnyObject?  // result of any operations performed as a result of the last performManipulation() if applicable
     }
     
-    struct DesiredState // represents the goal to the problem, all bits are represented as BitWrappers, there are 8 desired states possible (minimum one required)
+    struct DesiredState // represents the goal to the problem, all bits are represented as BitWrappers, there are 4 desired states possible (minimum one required)
     {
         var topState: BitWrapper?
         var bottomState: BitWrapper?
@@ -200,11 +200,13 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         return 0
     }
     
-    func start()    // sets up the game state and allows calls to performManipulation, can also be used to restart the level
+    func start()    // sets up the game state and allows calls to action(), can also be called to restart the level
     {
         gameState = GameState(levelName: name, startingState: startState, goal: finishState,
-                              currentState: currentState, stateSize: currentState.count, moves: 0, completed: false)
+                              currentState: startState, stateSize: currentState.count, moves: 0, completed: false)
         active = true
+        previousGameState = nil
+        undoAvailable = false
     }
     
     func action(rowIndex: Int, action: String, numIndex: Int? = nil) -> GameState? // perform action and update/return game state
@@ -220,12 +222,11 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             updateGameState(moves: move)
         }
         return state
-        
     }
     
     func undo() -> GameState?
     {
-        if undoAvailable
+        if active && undoAvailable
         {
             gameState = previousGameState
             undoAvailable = false
@@ -243,7 +244,6 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         {
             active = false
         }
-        
     }
     
     private func performManipulation(index: Int, manipulation: String, withExtraParam: Int? = nil) -> Int // handles flip, not, and shifts; returns 1 if successful, 0 if not
@@ -338,7 +338,6 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
                 }
             }
         }
-        
         return equals
     }
     
