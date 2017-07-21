@@ -20,7 +20,8 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "TestLevelScene") // name will be changed
+            {
 //                let bgMusicURL = Bundle.main.url(forResource: "bgMusic", withExtension: "mp3")
 //                
 //                do {
