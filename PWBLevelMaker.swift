@@ -14,7 +14,10 @@ func constructTestLevel() -> PWBLevel?
     var game: PWBLevel?
     
     let goal: EndState = [
-        "bot" : BitWrapper(fromString: "1010", alreadyBinary: true)
+        "bot" : BitWrapper(fromString: "1010", alreadyBinary: true),
+        "right" : BitWrapper(fromString: "10", alreadyBinary: true),
+        "top" : BitWrapper(fromString: "1111", alreadyBinary: true),
+        "left" : BitWrapper(fromString: "01", alreadyBinary: true)
     ]
     
     let ops: DirectionOfOperations = [
