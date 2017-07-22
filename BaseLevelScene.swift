@@ -11,7 +11,17 @@ struct Constants
     static let rectOffset = 1.1
     static let twoCountOffset = 1.1
     static let threeCountOffset = 2.0
+    static let levelLabelOffset = 0.7
+    
     static let rectCornerRadius = CGFloat(3)
+    static let answerLabelOffset = CGFloat(2)
+    static let answerWidthOffset = CGFloat(0.53)
+    static let rotate45degCounter = CGFloat(Double.pi/2)
+    static let rotate45degClock = CGFloat(-Double.pi/2)
+    
+    static let displayFont = "Helvetica Neue UltraLight"
+    static let problemFont = "CourierNewPSMT"
+    static let answerFont = "Helvetica Neue Thin"
 }
 
 import SpriteKit
@@ -84,10 +94,10 @@ class BaseLevelScene: SKScene {
         {
             switch swipe.direction
             {
-            case UISwipeGestureRecognizerDirection.right : gameAction(rowIndex: previousBit, action: "shift-right")
-            case UISwipeGestureRecognizerDirection.left : gameAction(rowIndex: previousBit, action: "shift-left")
-            case UISwipeGestureRecognizerDirection.up : gameAction(rowIndex: previousBit, action: "flip", numIndex: previousBitIndex)
-            case UISwipeGestureRecognizerDirection.down : gameAction(rowIndex: previousBit, action: "flip", numIndex: previousBitIndex)
+            case UISwipeGestureRecognizerDirection.right : if previousBit != -1 { gameAction(rowIndex: previousBit, action: "shift-right") }
+            case UISwipeGestureRecognizerDirection.left : if previousBit != -1 {gameAction(rowIndex: previousBit, action: "shift-left") }
+            case UISwipeGestureRecognizerDirection.up : if previousBitIndex !=  -1 {gameAction(rowIndex: previousBit, action: "flip", numIndex: previousBitIndex) }
+            case UISwipeGestureRecognizerDirection.down : if previousBitIndex != -1 {gameAction(rowIndex: previousBit, action: "flip", numIndex: previousBitIndex) }
             default : break
             }
         }
@@ -95,11 +105,11 @@ class BaseLevelScene: SKScene {
     
     private func setupLevelLabel()  // where the level name will be displayed on screen to user
     {
-        levelLabel = SKLabelNode(fontNamed: "Helvetica Neue UltraLight")
+        levelLabel = SKLabelNode(fontNamed: Constants.displayFont)
         levelLabel.text = game.levelName
         levelLabel.fontSize = 35
         levelLabel.fontColor = SKColor.black
-        levelLabel.position = CGPoint(x: frame.midX, y: frame.maxY * 0.7)
+        levelLabel.position = CGPoint(x: frame.midX, y: frame.maxY * CGFloat(Constants.levelLabelOffset))
         self.addChild(levelLabel)
     }
     
@@ -114,7 +124,7 @@ class BaseLevelScene: SKScene {
         {
             allBits[i].fontColor = SKColor.black
             allBits[i].fontSize = 50
-            allBits[i].fontName = "CourierNewPSMT"  // this is the only monospaced font that will work with SKLabelNode askdlsakdlas;kd;lsad;sakdsa 
+            allBits[i].fontName = Constants.problemFont  // this is the only monospaced font that will work with SKLabelNode askdlsakdlas;kd;lsad;sakdsa
             self.addChild(allBits[i])
         }
         
@@ -150,22 +160,22 @@ class BaseLevelScene: SKScene {
     private func setupAnswerLabels()
     {
         let goal = (game.state?.goal)!
-        let topAnswer = SKLabelNode(fontNamed: "Helvetica Neue Thin")
-        let botAnswer = SKLabelNode(fontNamed: "Helvetica Neue Thin")
-        let rightAnswer = SKLabelNode(fontNamed: "Helvetica Neue Thin")
-        let leftAnswer = SKLabelNode(fontNamed: "Helvetica Neue Thin")
+        let topAnswer = SKLabelNode(fontNamed: Constants.answerFont)
+        let botAnswer = SKLabelNode(fontNamed: Constants.answerFont)
+        let rightAnswer = SKLabelNode(fontNamed: Constants.answerFont)
+        let leftAnswer = SKLabelNode(fontNamed: Constants.answerFont)
         if goal.topState != nil{
             topAnswer.text = goal.topState?.toStr()
             topAnswer.fontColor = SKColor.darkGray
             topAnswer.fontSize = 50
-            topAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.maxY + CGFloat(2)))
+            topAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.maxY + Constants.answerLabelOffset))
             self.addChild(topAnswer)
         }
         if goal.bottomState != nil{
             botAnswer.text = goal.bottomState?.toStr()
             botAnswer.fontColor = SKColor.darkGray
             botAnswer.fontSize = 50
-            botAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.minY - CGFloat(2)))
+            botAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.minY - Constants.answerLabelOffset))
             botAnswer.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
             self.addChild(botAnswer)
         }
@@ -173,16 +183,16 @@ class BaseLevelScene: SKScene {
             rightAnswer.text = goal.rightState?.toStr()
             rightAnswer.fontColor = SKColor.darkGray
             rightAnswer.fontSize = 50
-            rightAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * CGFloat(0.53)), y: frame.midY)
-            rightAnswer.zRotation = CGFloat(Double.pi/2)
+            rightAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
+            rightAnswer.zRotation = Constants.rotate45degCounter
             self.addChild(rightAnswer)
         }
         if goal.leftState != nil{
             leftAnswer.text = goal.leftState?.toStr()
             leftAnswer.fontColor = SKColor.darkGray
             leftAnswer.fontSize = 50
-            leftAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * CGFloat(0.53)), y: frame.midY)
-            leftAnswer.zRotation = CGFloat(-Double.pi/2)
+            leftAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
+            leftAnswer.zRotation = Constants.rotate45degClock
             self.addChild(leftAnswer)
         }
     }
@@ -190,6 +200,8 @@ class BaseLevelScene: SKScene {
     private func gameAction(rowIndex: Int, action: String, numIndex: Int? = nil)
     {
         gameState = game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)!
+        previousBit = -1
+        previousBitIndex = -1
     }
     
     func touchDown(atPoint pos : CGPoint) {

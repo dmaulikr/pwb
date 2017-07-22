@@ -13,7 +13,7 @@ class Level1_1Scene: BaseLevelScene {
     
     override func didMove(to view: SKView)
     {
-        super.initLevel(fromLevel: constructTestLevelWithTwoBits()!)
+        super.initLevel(fromLevel: constructTestLevelSmall()!)
         super.didMove(to: view)
     }
     
