@@ -200,8 +200,7 @@ class BaseLevelScene: SKScene {
     private func gameAction(rowIndex: Int, action: String, numIndex: Int? = nil)
     {
         gameState = game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)!
-        previousBit = -1
-        previousBitIndex = -1
+        // self.resetBits()
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -215,6 +214,7 @@ class BaseLevelScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
+        self.resetBits()
         for i in 0..<allBits.count
         {
             if allBits[i].contains(touch.location(in: self))
@@ -223,6 +223,12 @@ class BaseLevelScene: SKScene {
                 calculateIndex(p: touch.location(in: self))
             }
         }
+    }
+    
+    private func resetBits()
+    {
+        previousBit = -1
+        previousBitIndex = -1
     }
     
     private func calculateIndex(p: CGPoint)
