@@ -105,3 +105,49 @@ func constructTestLevelSmall() -> PWBLevel?
     }
     return game
 }
+
+func constructSolvableTestLevel() -> PWBLevel?
+{
+    var game: PWBLevel?
+    
+    let goal: EndState = [
+        "bot" : BitWrapper(fromString: "1010", alreadyBinary: true),
+        "right" : BitWrapper(fromString: "10", alreadyBinary: true)
+    ]
+    
+    let ops: DirectionOfOperations = [
+        "down" : "add",
+        "right" : "or"
+    ]
+    
+    let name = "PWB_Test_Level_1"
+    
+    let startFrom: [BitWrapper] = [
+        BitWrapper(fromString: "1000", alreadyBinary: true),
+        BitWrapper(fromString: "0100", alreadyBinary: true)
+    ]
+    
+    do
+    {
+        try game = PWBLevel(withName: name, startFrom: startFrom, endWith: goal, withOperations: ops)
+    } catch
+    {
+        print("Could not construct /(name)")
+    }
+    return game
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

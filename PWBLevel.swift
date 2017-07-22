@@ -25,7 +25,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
 {
     private let name: String!
     private let startState: [BitWrapper]!
-    private var currentState: [BitWrapper]!
+    // private var currentState: [BitWrapper]!
     private var finishState: DesiredState!
     private var opDirections: OperationOrientation!
     private var gameState: GameState?
@@ -56,7 +56,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
     {
         name = withName
         startState = startFrom
-        currentState = startState
+        // currentState = copyBitWrapperArray(fromBitArray: startFrom)
         guard startFrom.count > 1 else {
             throw PWBLevelError.invalidInit(reason: "Must start with at least two BitWrappers in startFrom array")
         }
@@ -100,6 +100,16 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         var down: BinaryOperation?
         var right: UnaryOperation?
         var left: UnaryOperation?
+    }
+    
+    private func copyBitWrapperArray(fromBitArray: [BitWrapper]) -> [BitWrapper]
+    {
+        var result: [BitWrapper] = []
+        for bit in fromBitArray
+        {
+            result.append(BitWrapper(fromBit: bit))
+        }
+        return result
     }
     
     private func readDesiredState(endState: EndState) -> Int // returns number of "bad" entries in the dictionary
@@ -200,10 +210,10 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         return 0
     }
     
-    func start()    // sets up the game state and allows calls to action(), can also be called to restart the level
+    func start()    // sets up the game state and allows calls to action()
     {
         gameState = GameState(levelName: name, startingState: startState, goal: finishState,
-                              currentState: startState, stateSize: currentState.count, moves: 0, completed: false)
+                              currentState: copyBitWrapperArray(fromBitArray: startState), stateSize: startState.count, moves: 0, completed: false)
         active = true
         previousGameState = nil
         undoAvailable = false
@@ -236,8 +246,6 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
     
     private func updateGameState(moves: Int)
     {
-        gameState!.currentState = currentState
-        gameState!.stateSize = currentState.count
         gameState!.moves += moves
         gameState!.completed = checkCompletion()
         if gameState!.completed
@@ -250,10 +258,10 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
     {
         switch manipulation
         {
-        case "shift-left" : currentState[index].shiftLeft()
-        case "shift-right" : currentState[index].shiftRight()
-        case "not" : currentState[index].selfNot()
-        case "flip" : if let binaryIndex = withExtraParam {currentState[index].flip(index: binaryIndex)} else {return 0}
+        case "shift-left" : gameState!.currentState[index].shiftLeft()
+        case "shift-right" : gameState!.currentState[index].shiftRight()
+        case "not" : gameState!.currentState[index].selfNot()
+        case "flip" : if let binaryIndex = withExtraParam {gameState!.currentState[index].flip(index: binaryIndex)} else {return 0}
         default : return 0
         }
         return 1
@@ -315,8 +323,8 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             {
                 if let operation = binaryFunc
                 {
-                    let initialValue = currentState[0]
-                    let computedValue = currentState[1..<currentState.count].reduce(initialValue, operation)
+                    let initialValue = gameState!.currentState[0]
+                    let computedValue = gameState!.currentState[1..<gameState!.currentState.count].reduce(initialValue, operation)
                     
                     // print(computedValue.toStr())
                     equals = BitWrapper.equals(lhs: answer, rhs: computedValue)
@@ -327,7 +335,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
                 if let operation = unaryFunc
                 {
                     var strAnswer = ""
-                    for bit in currentState
+                    for bit in gameState!.currentState
                     {
                         strAnswer += operation(bit).toStr()
                     }
