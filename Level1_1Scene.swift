@@ -13,12 +13,29 @@ class Level1_1Scene: BaseLevelScene {
     
     override func didMove(to view: SKView)
     {
-        super.initLevel(fromLevel: constructTestLevelSmall()!)
+        super.initLevel(fromLevel: constructSolvableTestLevel()!)
         super.didMove(to: view)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesBegan(touches, with: event)
+        for touch in touches
+        {
+            let location = touch.location(in: self)
+            if atPoint(location).name == "back"
+            {
+                if let scene = MainMenuScene(fileNamed: "MainMenu")
+                {
+                    scene.scaleMode = .resizeFill
+                    scene.backgroundColor = UIColor.white
+                    view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.down, duration: TimeInterval(0.85)))
+                }
+            }
+            else if atPoint(location).name == "restart"
+            {
+                super.restartGame()
+            }
+        }
     }
 }

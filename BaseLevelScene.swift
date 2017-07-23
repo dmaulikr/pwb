@@ -21,7 +21,7 @@ struct Constants
     
     static let displayFont = "Helvetica Neue UltraLight"
     static let problemFont = "CourierNewPSMT"
-    static let answerFont = "Helvetica Neue Thin"
+    static let answerFont = "CourierNewPSMT"//"Helvetica Neue Thin"
 }
 
 import SpriteKit
@@ -34,6 +34,9 @@ class BaseLevelScene: SKScene {
     private var previousBit: Int = -1
     private var previousBitIndex: Int = -1
     private var gameState: PWBLevel.GameState?
+    {
+        return game.state
+    }
     
     private var swipeRight: UISwipeGestureRecognizer! = nil
     private var swipeLeft: UISwipeGestureRecognizer! = nil
@@ -59,14 +62,21 @@ class BaseLevelScene: SKScene {
     {
         game = fromLevel
         game.start()
-        gameState = game.state
+        // gameState = game.state
+    }
+    
+    func restartGame()
+    {
+        // print("restarting game")
+        game.start()
+        levelLabel.text = game.levelName
     }
     
     private func testInit()
     {
        // game = constructTestLevelWithTwoBits()!
         game.start()
-        gameState = game.state
+        // gameState = game.state
     }
     
     private func setupSwipeGestures(ofView view: SKView)
@@ -183,23 +193,23 @@ class BaseLevelScene: SKScene {
             rightAnswer.text = goal.rightState?.toStr()
             rightAnswer.fontColor = SKColor.darkGray
             rightAnswer.fontSize = 50
-            rightAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
-            rightAnswer.zRotation = Constants.rotate45degCounter
+            rightAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
+            rightAnswer.zRotation = Constants.rotate45degClock// Constants.rotate45degCounter
             self.addChild(rightAnswer)
         }
         if goal.leftState != nil{
             leftAnswer.text = goal.leftState?.toStr()
             leftAnswer.fontColor = SKColor.darkGray
             leftAnswer.fontSize = 50
-            leftAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
-            leftAnswer.zRotation = Constants.rotate45degClock
+            leftAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
+            leftAnswer.zRotation = Constants.rotate45degCounter// Constants.rotate45degClock
             self.addChild(leftAnswer)
         }
     }
     
     private func gameAction(rowIndex: Int, action: String, numIndex: Int? = nil)
     {
-        gameState = game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)!
+        game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)!
         // self.resetBits()
     }
     
@@ -273,6 +283,10 @@ class BaseLevelScene: SKScene {
             for i in 0..<allBits.count
             {
                 allBits[i].text = state.currentState[i].toStr()
+            }
+            if state.completed
+            {
+                levelLabel.text = "Puzzle Solved! Congratulations!"
             }
         }
     }
