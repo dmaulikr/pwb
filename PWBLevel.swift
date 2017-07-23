@@ -219,7 +219,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         undoAvailable = false
     }
     
-    func action(rowIndex: Int, action: String, numIndex: Int? = nil) -> GameState? // perform action and update/return game state
+    func action(rowIndex: Int, action: String, numIndex: Int? = nil) //-> GameState? // perform action and update/return game state
     {
         if active
         {
@@ -231,7 +231,7 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             let move = performManipulation(index: rowIndex, manipulation: action, withExtraParam: numIndex)
             updateGameState(moves: move)
         }
-        return state
+        //return state
     }
     
     func undo() -> GameState?

@@ -43,7 +43,14 @@ class BaseLevelScene: SKScene {
     private var swipeUp: UISwipeGestureRecognizer! = nil
     private var swipeDown: UISwipeGestureRecognizer! = nil
     
+    private var continueLabel: SKLabelNode! = nil
+    
     private var rect: SKShapeNode! = nil
+    
+    var problemContainer: SKShapeNode!
+    {
+        return rect
+    }
     
     override func didMove(to view: SKView) {    // almost equivalent of init(), game MUST be initialized with self.initGame() before calling this method
 
@@ -70,6 +77,10 @@ class BaseLevelScene: SKScene {
         // print("restarting game")
         game.start()
         levelLabel.text = game.levelName
+        if continueLabel != nil
+        {
+            continueLabel.text = ""
+        }
     }
     
     private func testInit()
@@ -209,8 +220,23 @@ class BaseLevelScene: SKScene {
     
     private func gameAction(rowIndex: Int, action: String, numIndex: Int? = nil)
     {
-        game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)!
+        game.action(rowIndex: rowIndex, action: action, numIndex: numIndex)
+        if (game.state?.completed)!
+        {
+            self.addNextLevelLabel()
+        }
         // self.resetBits()
+    }
+    
+    private func addNextLevelLabel()
+    {
+        continueLabel = SKLabelNode(fontNamed: Constants.displayFont)
+        continueLabel.text = "Next Level"
+        continueLabel.fontSize = 25
+        continueLabel.fontColor = SKColor.blue
+        continueLabel.position = CGPoint(x: rect.frame.width * CGFloat(1.5), y: frame.midY)
+        continueLabel.name = "continue"
+        self.addChild(continueLabel)
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -227,7 +253,8 @@ class BaseLevelScene: SKScene {
         self.resetBits()
         for i in 0..<allBits.count
         {
-            if allBits[i].contains(touch.location(in: self))
+            let location = touch.location(in: self)
+            if allBits[i].contains(location)
             {
                 previousBit = i
                 calculateIndex(p: touch.location(in: self))
