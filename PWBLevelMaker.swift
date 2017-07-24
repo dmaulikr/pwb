@@ -47,9 +47,9 @@ func constructTestLevelWithThreeBits() -> PWBLevel?
     
     let goal: EndState = [
         "bot" : BitWrapper(fromString: "101000", alreadyBinary: true),
-        "right" : BitWrapper(fromString: "10", alreadyBinary: true),
+        "right" : BitWrapper(fromString: "101", alreadyBinary: true),
         "top" : BitWrapper(fromString: "111100", alreadyBinary: true),
-        "left" : BitWrapper(fromString: "01", alreadyBinary: true)
+        "left" : BitWrapper(fromString: "010", alreadyBinary: true)
     ]
     
     let ops: DirectionOfOperations = [

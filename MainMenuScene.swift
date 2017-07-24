@@ -16,13 +16,14 @@ class MainMenuScene: SKScene {
             let location = touch.location(in: self)
             if atPoint(location).name == "play"
             {
-                if let scene = Level1_1Scene(fileNamed: "LevelScene")
+                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white
-                    view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.up, duration: TimeInterval(0.85)))
+                    view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.left, duration: TimeInterval(0.85)))
                 }
             }
+            
         }
 //        if let scene = Level1_1Scene(fileNamed: "LevelScene")
 //        {

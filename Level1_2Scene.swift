@@ -24,7 +24,7 @@ class Level1_2Scene: BaseLevelScene {
             let location = touch.location(in: self)
             if atPoint(location).name == "back"
             {
-                if let scene = MainMenuScene(fileNamed: "MainMenu")
+                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white

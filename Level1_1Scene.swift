@@ -13,6 +13,7 @@ class Level1_1Scene: BaseLevelScene {
     override func didMove(to view: SKView)
     {
         super.initLevel(fromLevel: constructTestLevel1()!)
+        // super.initLevel(fromLevel: constructTestLevelWithThreeBits()!)
         super.didMove(to: view)
         self.addMarkings()
     }
@@ -23,18 +24,18 @@ class Level1_1Scene: BaseLevelScene {
         
         let botArrow = SKSpriteNode(imageNamed: "PWBArrow")
         botArrow.zRotation = Constants.rotate45degClock
-        botArrow.position = CGPoint(x: rect.maxX - CGFloat(2), y: rect.minY * CGFloat(1.35))
+        botArrow.position = CGPoint(x: rect.maxX - CGFloat(1.5), y: rect.minY - CGFloat(20))
         botArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
         
         let rightArrow = SKSpriteNode(imageNamed: "PWBArrow")
-        rightArrow.position = CGPoint(x: rect.maxX * CGFloat(1.35), y: rect.maxY - CGFloat(2))
+        rightArrow.position = CGPoint(x: rect.maxX + CGFloat(20), y: rect.maxY - CGFloat(1.5))
         rightArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
         
         super.addChild(botArrow)
         super.addChild(rightArrow)
         
         let botOp = SKLabelNode(fontNamed: Constants.problemFont)
-        botOp.fontSize = 25
+        botOp.fontSize = 20
         botOp.fontColor = SKColor.darkGray
         botOp.text = "ADD"
         botOp.position = CGPoint(x: botArrow.frame.maxX + CGFloat(2), y: botArrow.frame.midY)
@@ -42,7 +43,7 @@ class Level1_1Scene: BaseLevelScene {
         botOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         
         let rightOp = SKLabelNode(fontNamed: Constants.problemFont)
-        rightOp.fontSize = 25
+        rightOp.fontSize = 20
         rightOp.fontColor = SKColor.darkGray
         rightOp.text = "OR"
         rightOp.position = CGPoint(x: rightArrow.frame.midX, y: rightArrow.frame.maxY + CGFloat(2))
@@ -60,7 +61,7 @@ class Level1_1Scene: BaseLevelScene {
             let location = touch.location(in: self)
             if atPoint(location).name == "back"
             {
-                if let scene = MainMenuScene(fileNamed: "MainMenu")
+                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white

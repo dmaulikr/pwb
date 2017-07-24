@@ -167,7 +167,7 @@ class BaseLevelScene: SKScene {
     
     private func setupContainerRect()   // construct rectangle that will surround the problem labels
     {
-        let width = allBits[0].frame.size.width * CGFloat(Constants.rectOffset)
+        let width = allBits[0].frame.size.width * CGFloat(Constants.rectOffset + 0.05)
         let height = allBits.reduce(CGFloat(0), {return $0 + $1.frame.size.height})
         rect = SKShapeNode(rectOf: CGSize(width: width,
                                               height: height * CGFloat(Constants.rectOffset)), cornerRadius: Constants.rectCornerRadius)
