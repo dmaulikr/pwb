@@ -22,6 +22,7 @@ struct Constants
     static let displayFont = "Helvetica Neue UltraLight"
     static let problemFont = "CourierNewPSMT"
     static let answerFont = "CourierNewPSMT"//"Helvetica Neue Thin"
+    static let displayFontSize = CGFloat(55)
 }
 
 import SpriteKit
@@ -219,7 +220,7 @@ class BaseLevelScene: SKScene {
         for i in 0..<allBits.count
         {
             allBits[i].fontColor = SKColor.black
-            allBits[i].fontSize = 50
+            allBits[i].fontSize = Constants.displayFontSize
             allBits[i].fontName = Constants.problemFont  // this is the only monospaced font that will work with SKLabelNode askdlsakdlas;kd;lsad;sakdsa
             self.addChild(allBits[i])
         }
@@ -263,14 +264,14 @@ class BaseLevelScene: SKScene {
         if goal.topState != nil{
             topAnswer.text = goal.topState?.toStr()
             topAnswer.fontColor = SKColor.darkGray
-            topAnswer.fontSize = 50
+            topAnswer.fontSize = Constants.displayFontSize
             topAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.maxY + Constants.answerLabelOffset))
             self.addChild(topAnswer)
         }
         if goal.bottomState != nil{
             botAnswer.text = goal.bottomState?.toStr()
             botAnswer.fontColor = SKColor.darkGray
-            botAnswer.fontSize = 50
+            botAnswer.fontSize = Constants.displayFontSize
             botAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.minY - Constants.answerLabelOffset))
             botAnswer.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
             self.addChild(botAnswer)
@@ -278,7 +279,7 @@ class BaseLevelScene: SKScene {
         if goal.rightState != nil{
             rightAnswer.text = goal.rightState?.toStr()
             rightAnswer.fontColor = SKColor.darkGray
-            rightAnswer.fontSize = 50
+            rightAnswer.fontSize = Constants.displayFontSize
             rightAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
             rightAnswer.zRotation = Constants.rotate45degClock// Constants.rotate45degCounter
             self.addChild(rightAnswer)
@@ -286,7 +287,7 @@ class BaseLevelScene: SKScene {
         if goal.leftState != nil{
             leftAnswer.text = goal.leftState?.toStr()
             leftAnswer.fontColor = SKColor.darkGray
-            leftAnswer.fontSize = 50
+            leftAnswer.fontSize = Constants.displayFontSize
             leftAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
             leftAnswer.zRotation = Constants.rotate45degCounter// Constants.rotate45degClock
             self.addChild(leftAnswer)
