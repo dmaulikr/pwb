@@ -83,6 +83,81 @@ class BaseLevelScene: SKScene {
         }
     }
     
+    // may improve this later but for now just need it working
+    func addUpArrowOperation(operation: String)
+    {
+        let upArrow = SKSpriteNode(imageNamed: "PWBArrow")
+        upArrow.zRotation = Constants.rotate45degCounter
+        upArrow.position = CGPoint(x: rect.frame.minX + CGFloat(1.5), y: rect.frame.maxY + CGFloat(10))
+        upArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
+        
+        let topOp = SKLabelNode(fontNamed: Constants.problemFont)
+        topOp.fontSize = 20
+        topOp.fontColor = SKColor.darkGray
+        topOp.text = operation
+        topOp.position = CGPoint(x: rect.frame.minX - CGFloat(5), y: rect.frame.maxY + CGFloat(5))
+        topOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        
+        self.addChild(upArrow)
+        self.addChild(topOp)
+    }
+    
+    func addDownArrowOperation(operation: String)
+    {
+        let botArrow = SKSpriteNode(imageNamed: "PWBArrow")
+        botArrow.zRotation = Constants.rotate45degClock
+        botArrow.position = CGPoint(x: rect.frame.maxX - CGFloat(1.5), y: rect.frame.minY - CGFloat(10))
+        botArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
+        
+        let botOp = SKLabelNode(fontNamed: Constants.problemFont)
+        botOp.fontSize = 20
+        botOp.fontColor = SKColor.darkGray
+        botOp.text = "ADD"
+        botOp.position = CGPoint(x: rect.frame.maxX + CGFloat(5), y: rect.frame.minY - CGFloat(5))
+        botOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        botOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
+        
+        self.addChild(botArrow)
+        self.addChild(botOp)
+    }
+    
+    func addRightArrowOperation(operation: String)
+    {
+        
+        let rightArrow = SKSpriteNode(imageNamed: "PWBArrow")
+        rightArrow.position = CGPoint(x: rect.frame.maxX + CGFloat(10), y: rect.frame.maxY - CGFloat(1.5))
+        rightArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
+        
+        let rightOp = SKLabelNode(fontNamed: Constants.problemFont)
+        rightOp.fontSize = 20
+        rightOp.fontColor = SKColor.darkGray
+        rightOp.text = "OR"
+        rightOp.position = CGPoint(x: rect.frame.maxX + CGFloat(5), y: rect.frame.maxY + CGFloat(5))
+        rightOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        
+        self.addChild(rightArrow)
+        self.addChild(rightOp)
+    }
+    
+    func addLeftArrowOperation(operation: String)
+    {
+        let leftArrow = SKSpriteNode(imageNamed: "PWBArrow")
+        leftArrow.zRotation = Constants.rotate45degCounter * CGFloat(2)
+        leftArrow.position = CGPoint(x: rect.frame.minX - CGFloat(10), y: rect.frame.minY + CGFloat(1.5))
+        leftArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
+        
+        let leftOp = SKLabelNode(fontNamed: Constants.problemFont)
+        leftOp.fontSize = 20
+        leftOp.fontColor = SKColor.darkGray
+        leftOp.text = "NOT"
+        leftOp.position = CGPoint(x: rect.frame.minX - CGFloat(5), y: rect.frame.minY - CGFloat(5))
+        leftOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        leftOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
+        
+        self.addChild(leftArrow)
+        self.addChild(leftOp)
+    }
+    
     private func testInit()
     {
        // game = constructTestLevelWithTwoBits()!
@@ -228,6 +303,7 @@ class BaseLevelScene: SKScene {
         // self.resetBits()
     }
     
+    // this functionality will be moved to each individual level scene class later
     private func addNextLevelLabel()
     {
         continueLabel = SKLabelNode(fontNamed: Constants.displayFont)

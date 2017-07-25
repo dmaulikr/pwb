@@ -14,6 +14,8 @@ class Level1_2Scene: BaseLevelScene {
     {
         super.initLevel(fromLevel: constructTestLevel2()!)
         super.didMove(to: view)
+        super.addDownArrowOperation(operation: "ADD")
+        super.addUpArrowOperation(operation: "OR")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)

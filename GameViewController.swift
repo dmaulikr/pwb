@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "MainMenu") // name will be changed
+            if let scene = LoadScreenScene(fileNamed: "LoadingScreen") // name will be changed
             {
 //                let bgMusicURL = Bundle.main.url(forResource: "bgMusic", withExtension: "mp3")
 //                
@@ -43,7 +43,7 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .resizeFill
                 
                 // Present the scene
-                view.presentScene(scene)
+                view.presentScene(scene, transition: SKTransition.fade(with: SKColor.white, duration: TimeInterval(5)))
             }
             
             view.ignoresSiblingOrder = true

@@ -4,7 +4,6 @@
 //
 //  Created by Nicholas Wei on 7/21/17.
 //  Copyright © 2017 Nicholas Wei. All rights reserved.
-//
 
 import SpriteKit
 
@@ -15,46 +14,17 @@ class Level1_1Scene: BaseLevelScene {
         super.initLevel(fromLevel: constructTestLevel1()!)
         // super.initLevel(fromLevel: constructTestLevelWithThreeBits()!)
         super.didMove(to: view)
-        self.addMarkings()
-    }
-    
-    private func addMarkings()
-    {
-        let rect = super.problemContainer.frame
-        
-        let botArrow = SKSpriteNode(imageNamed: "PWBArrow")
-        botArrow.zRotation = Constants.rotate45degClock
-        botArrow.position = CGPoint(x: rect.maxX - CGFloat(1.5), y: rect.minY - CGFloat(20))
-        botArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
-        
-        let rightArrow = SKSpriteNode(imageNamed: "PWBArrow")
-        rightArrow.position = CGPoint(x: rect.maxX + CGFloat(20), y: rect.maxY - CGFloat(1.5))
-        rightArrow.size = CGSize(width: CGFloat(50), height: CGFloat(11))
-        
-        super.addChild(botArrow)
-        super.addChild(rightArrow)
-        
-        let botOp = SKLabelNode(fontNamed: Constants.problemFont)
-        botOp.fontSize = 20
-        botOp.fontColor = SKColor.darkGray
-        botOp.text = "ADD"
-        botOp.position = CGPoint(x: botArrow.frame.maxX + CGFloat(2), y: botArrow.frame.midY)
-        botOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        botOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        
-        let rightOp = SKLabelNode(fontNamed: Constants.problemFont)
-        rightOp.fontSize = 20
-        rightOp.fontColor = SKColor.darkGray
-        rightOp.text = "OR"
-        rightOp.position = CGPoint(x: rightArrow.frame.midX, y: rightArrow.frame.maxY + CGFloat(2))
-        
-        super.addChild(botOp)
-        super.addChild(rightOp)
-        
+        // super.addUpArrowOperation(operation: "XOR")
+        super.addDownArrowOperation(operation: "ADD")
+        // super.addLeftArrowOperation(operation: "AND")
+        super.addRightArrowOperation(operation: "OR")
+        // self.addMarkings()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
+        // back and restart nodes will be moved into the base level scene class
+        // while the "next level" node will be moved into each level class because not all levels have "continue" available aka last level
         super.touchesBegan(touches, with: event)
         for touch in touches
         {
