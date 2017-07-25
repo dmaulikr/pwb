@@ -21,11 +21,8 @@ class Level1_1Scene: BaseLevelScene {
         // self.addMarkings()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        // back and restart nodes will be moved into the base level scene class
-        // while the "next level" node will be moved into each level class because not all levels have "continue" available aka last level
-        super.touchesBegan(touches, with: event)
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches
         {
             let location = touch.location(in: self)
@@ -52,5 +49,12 @@ class Level1_1Scene: BaseLevelScene {
                 }
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        // back and restart nodes will be moved into the base level scene class
+        // while the "next level" node will be moved into each level class because not all levels have "continue" available aka last level
+        super.touchesBegan(touches, with: event)
     }
 } // class

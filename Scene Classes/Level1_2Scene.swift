@@ -18,9 +18,12 @@ class Level1_2Scene: BaseLevelScene {
         super.addUpArrowOperation(operation: "OR")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
         for touch in touches
         {
             let location = touch.location(in: self)
@@ -39,7 +42,7 @@ class Level1_2Scene: BaseLevelScene {
             }
 //            else if atPoint(location).name == "continue"
 //            {
-//                if let scene = Level1_2Scene(fileNamed: "LevelScene")
+//                if let scene = Level1_3Scene(fileNamed: "LevelScene") // need to impleement
 //                {
 //                    scene.scaleMode = .resizeFill
 //                    scene.backgroundColor = UIColor.white
