@@ -16,11 +16,13 @@ class MainMenuScene: SKScene {
             let location = touch.location(in: self)
             if atPoint(location).name == "play"
             {
-                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
+                if let scene = PackSelectionScene(fileNamed: "LevelPack")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white
                     view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.left, duration: TimeInterval(0.85)))
+                    // view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.down, duration: TimeInterval(1)))
+
                 }
             }
             

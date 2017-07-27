@@ -19,12 +19,12 @@ class LoadScreenScene: SKScene {
     {
         // super.didMove(to: view)
         // let bitNode = SKLabelNode(fontNamed: Constants.displayFont)
-        bitNode.fontColor = SKColor.black
+        bitNode.fontColor = SKColor.white
         bitNode.fontSize = 50
         bitNode.position = CGPoint(x: 0, y: 0)
         
        // let numNode = SKLabelNode(fontNamed: Constants.displayFont)
-        numNode.fontColor = SKColor.black
+        numNode.fontColor = SKColor.white
         numNode.fontSize = 50
         numNode.position = CGPoint(x: 0, y: 0)
         numNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
@@ -52,8 +52,8 @@ class LoadScreenScene: SKScene {
             if let scene = MainMenuScene(fileNamed: "MainMenu")
             {
                 scene.scaleMode = .resizeFill
-                scene.backgroundColor = UIColor.white
-                view!.presentScene(scene, transition: SKTransition.fade(with: SKColor.white, duration: TimeInterval(2)))
+                scene.backgroundColor = UIColor(hue: 0.5222, saturation: 1, brightness: 0.97, alpha: 1)
+                view!.presentScene(scene, transition: SKTransition.fade(with: UIColor(hue: 0.5222, saturation: 1, brightness: 0.97, alpha: 1), duration: TimeInterval(2)))
             }
         }
         

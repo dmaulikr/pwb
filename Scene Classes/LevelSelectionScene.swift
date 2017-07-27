@@ -18,11 +18,11 @@ class LevelSelectionScene: SKScene {
             {
                 if nodeName == "back"
                 {
-                    if let scene = SKScene(fileNamed: "MainMenu")
+                    if let scene = PackSelectionScene(fileNamed: "LevelPack")
                     {
                         scene.scaleMode = .resizeFill
                         scene.backgroundColor = UIColor.white
-                        view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.right, duration: TimeInterval(0.85)))
+                        view!.presentScene(scene, transition: SKTransition.reveal(with: SKTransitionDirection.down, duration: TimeInterval(0.5)))
                     }
                 }
                 else

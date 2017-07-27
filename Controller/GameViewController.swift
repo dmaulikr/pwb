@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
                 
                 
                 // Set the scale mode to scale to fit the window
-                scene.backgroundColor = UIColor.white
+                scene.backgroundColor = UIColor(hue: 0.5222, saturation: 1, brightness: 0.97, alpha: 1)
                 scene.scaleMode = .resizeFill
                 
                 // Present the scene

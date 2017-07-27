@@ -307,13 +307,16 @@ class BaseLevelScene: SKScene {
     // this functionality will be moved to each individual level scene class later
     private func addNextLevelLabel()
     {
-        continueLabel = SKLabelNode(fontNamed: Constants.displayFont)
+        if continueLabel == nil
+        {
+            continueLabel = SKLabelNode(fontNamed: Constants.displayFont)
+            self.addChild(continueLabel)
+        }
         continueLabel.text = "Next Level"
-        continueLabel.fontSize = 25
+        continueLabel.fontSize = 30
         continueLabel.fontColor = SKColor.blue
         continueLabel.position = CGPoint(x: rect.frame.width * CGFloat(1.5), y: frame.midY)
         continueLabel.name = "continue"
-        self.addChild(continueLabel)
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -390,7 +393,7 @@ class BaseLevelScene: SKScene {
             }
             if state.completed
             {
-                levelLabel.text = "Puzzle Solved! Congratulations!"
+                levelLabel.text = "Puzzle Solved!"
             }
         }
     }
