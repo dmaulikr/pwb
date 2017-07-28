@@ -12,7 +12,7 @@ class Level1_1Scene: BaseLevelScene {
     override func didMove(to view: SKView)
     {
         super.initLevel(fromLevel: constructTestLevel1()!)
-        // super.initLevel(fromLevel: constructTestLevelWithThreeBits()!)
+        // super.initLevel(fromLevel: constructTestLevelSmall()!)
         super.didMove(to: view)
         // super.addUpArrowOperation(operation: "XOR")
         super.addDownArrowOperation(operation: "ADD")

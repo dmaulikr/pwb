@@ -24,6 +24,15 @@ class PackSelectionScene: SKScene {
                     view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.down, duration: TimeInterval(0.55)))
                 }
             }
+            else if nodeName == "tutorial"
+            {
+                if let scene = TrainingScene(fileNamed: "Training1")
+                {
+                    scene.scaleMode = .resizeFill
+                    scene.backgroundColor = UIColor.white
+                    view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.down, duration: TimeInterval(0.55)))
+                }
+            }
             else if nodeName == "back"
             {
                 if let scene = SKScene(fileNamed: "MainMenu")

@@ -80,16 +80,16 @@ func constructTestLevelSmall() -> PWBLevel?
     
     let goal: EndState = [
         "bot" : BitWrapper(fromString: "1010", alreadyBinary: true),
-        "right" : BitWrapper(fromString: "10", alreadyBinary: true),
-        "top" : BitWrapper(fromString: "1110", alreadyBinary: true),
-        "left" : BitWrapper(fromString: "01", alreadyBinary: true)
+        "right" : BitWrapper(fromString: "10", alreadyBinary: true)
+        // "top" : BitWrapper(fromString: "1110", alreadyBinary: true),
+        // "left" : BitWrapper(fromString: "01", alreadyBinary: true)
     ]
     
     let ops: DirectionOfOperations = [
         "down" : "add"
     ]
     
-    let name = "PWB_Test_Level_Small"
+    let name = "Test Level"
     
     let startFrom: [BitWrapper] = [
         BitWrapper(fromString: "1000", alreadyBinary: true),

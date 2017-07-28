@@ -22,7 +22,7 @@ class LevelSelectionScene: SKScene {
                     {
                         scene.scaleMode = .resizeFill
                         scene.backgroundColor = UIColor.white
-                        view!.presentScene(scene, transition: SKTransition.reveal(with: SKTransitionDirection.down, duration: TimeInterval(0.5)))
+                        view!.presentScene(scene, transition: SKTransition.reveal(with: SKTransitionDirection.down, duration: TimeInterval(0.85)))
                     }
                 }
                 else
