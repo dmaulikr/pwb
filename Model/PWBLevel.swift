@@ -192,20 +192,24 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
             case "add" : opDirections.right = BitWrapper.selfAdd
             case "or" : opDirections.right = BitWrapper.selfOr
             case "and" : opDirections.right = BitWrapper.selfAnd
-            case "xor" : opDirections.right = BitWrapper.selfOr
+            case "xor" : opDirections.right = BitWrapper.selfXor
             default : return 1
             }
         }
-        else
+        else if withDir == "left"
         {
             switch withOp
             {
             case "add" : opDirections.left = BitWrapper.selfAdd
             case "or" : opDirections.left = BitWrapper.selfOr
             case "and" : opDirections.left = BitWrapper.selfAnd
-            case "xor" : opDirections.left = BitWrapper.selfOr
+            case "xor" : opDirections.left = BitWrapper.selfXor
             default : return 1
             }
+        }
+        else
+        {
+            return 1
         }
         return 0
     }
@@ -337,11 +341,18 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
                     var strAnswer = ""
                     for bit in gameState!.currentState
                     {
-                        strAnswer += operation(bit).toStr()
+                        if direction == "right"
+                        {
+                            strAnswer += operation(bit).toStr()
+                        }
+                        else
+                        {
+                            strAnswer = operation(bit).toStr() + strAnswer
+                        }
                     }
-                    
+
                     let computedValue = BitWrapper(fromString: strAnswer, alreadyBinary: true)
-                    
+                    // print("\(direction) : \(computedValue.toStr())")
                     equals = BitWrapper.equals(lhs: answer, rhs: computedValue)
                 }
             }

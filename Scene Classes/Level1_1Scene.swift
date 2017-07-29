@@ -11,7 +11,7 @@ class Level1_1Scene: BaseLevelScene {
     
     override func didMove(to view: SKView)
     {
-        super.initLevel(fromLevel: constructTestLevel1()!)
+        super.initLevel(fromLevel: constructStarter1()!)
         // super.initLevel(fromLevel: constructTestLevelSmall()!)
         super.didMove(to: view)
         // super.addUpArrowOperation(operation: "XOR")
@@ -28,7 +28,7 @@ class Level1_1Scene: BaseLevelScene {
             let location = touch.location(in: self)
             if atPoint(location).name == "back"
             {
-                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
+                if let scene = StarterSelectionScene(fileNamed: "StarterSelection")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white

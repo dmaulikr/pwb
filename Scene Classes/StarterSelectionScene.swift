@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class LevelSelectionScene: SKScene {
+class StarterSelectionScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches
@@ -32,6 +32,9 @@ class LevelSelectionScene: SKScene {
                     {
                     case "level1_1" : scene = Level1_1Scene(fileNamed: "LevelScene")
                     case "level1_2" : scene = Level1_2Scene(fileNamed: "LevelScene")
+                    case "level1_3" : scene = Level1_3Scene(fileNamed: "LevelScene")
+                    case "level1_4" : scene = Level1_4Scene(fileNamed: "LevelScene")
+                    case "level1_5" : scene = Level1_5Scene(fileNamed: "LevelScene")
                     default : ()
                     }
                 

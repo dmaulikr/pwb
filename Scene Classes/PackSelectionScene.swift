@@ -17,7 +17,7 @@ class PackSelectionScene: SKScene {
             let nodeName = atPoint(location).name
             if nodeName == "starter"
             {
-                if let scene = LevelSelectionScene(fileNamed: "LevelSelection")
+                if let scene = StarterSelectionScene(fileNamed: "StarterSelection")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white

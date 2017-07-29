@@ -106,7 +106,7 @@ func constructTestLevelSmall() -> PWBLevel?
     return game
 }
 
-func constructTestLevel1() -> PWBLevel?
+func constructStarter1() -> PWBLevel?
 {
     var game: PWBLevel?
     
@@ -120,7 +120,7 @@ func constructTestLevel1() -> PWBLevel?
         "right" : "or"
     ]
     
-    let name = "PWB_Test_Level_1"
+    let name = "Starter - 1"
     
     let startFrom: [BitWrapper] = [
         BitWrapper(fromString: "1000", alreadyBinary: true),
@@ -137,7 +137,7 @@ func constructTestLevel1() -> PWBLevel?
     return game
 }
 
-func constructTestLevel2() -> PWBLevel?
+func constructStarter2() -> PWBLevel?
 {
     var game: PWBLevel?
     
@@ -151,7 +151,7 @@ func constructTestLevel2() -> PWBLevel?
         "up" : "or"
     ]
     
-    let name = "PWB_Test_Level_2"
+    let name = "Starter - 2"
     
     let startFrom: [BitWrapper] = [
         BitWrapper(fromString: "1000", alreadyBinary: true),
@@ -168,7 +168,98 @@ func constructTestLevel2() -> PWBLevel?
     return game
 }
 
+func constructStarter3() -> PWBLevel?
+{
+    var game: PWBLevel?
+    
+    let goal: EndState = [
+        "right" : BitWrapper(fromString: "10", alreadyBinary: true),
+        "left" : BitWrapper(fromString: "10", alreadyBinary: true)
+    ]
+    
+    let ops: DirectionOfOperations = [
+        "right" : "xor",
+        "left" : "and"
+    ]
+    
+    let name = "Starter - 3"
+    
+    let startFrom: [BitWrapper] = [
+        BitWrapper(fromString: "1010", alreadyBinary: true),
+        BitWrapper(fromString: "0101", alreadyBinary: true)
+    ]
+    
+    do
+    {
+        try game = PWBLevel(withName: name, startFrom: startFrom, endWith: goal, withOperations: ops)
+    } catch
+    {
+        print("Could not construct /(name)")
+    }
+    return game
+}
 
+func constructStarter4() -> PWBLevel?
+{
+    var game: PWBLevel?
+    
+    let goal: EndState = [
+        "top" : BitWrapper(fromString: "1010", alreadyBinary: true),
+        "left" : BitWrapper(fromString: "11", alreadyBinary: true)
+    ]
+    
+    let ops: DirectionOfOperations = [
+        "up" : "xor",
+        "left" : "or"
+    ]
+    
+    let name = "Starter - 4"
+    
+    let startFrom: [BitWrapper] = [
+        BitWrapper(fromString: "1111", alreadyBinary: true),
+        BitWrapper(fromString: "0000", alreadyBinary: true)
+    ]
+    
+    do
+    {
+        try game = PWBLevel(withName: name, startFrom: startFrom, endWith: goal, withOperations: ops)
+    } catch
+    {
+        print("Could not construct /(name)")
+    }
+    return game
+}
+
+func constructStarter5() -> PWBLevel?
+{
+    var game: PWBLevel?
+    
+    let goal: EndState = [
+        "top" : BitWrapper(fromString: "10000", alreadyBinary: true),
+        "right" : BitWrapper(fromString: "10", alreadyBinary: true)
+    ]
+    
+    let ops: DirectionOfOperations = [
+        "up" : "add",
+        "right" : "and"
+    ]
+    
+    let name = "Starter - 5"
+    
+    let startFrom: [BitWrapper] = [
+        BitWrapper(fromString: "1001", alreadyBinary: true),
+        BitWrapper(fromString: "0000", alreadyBinary: true)
+    ]
+    
+    do
+    {
+        try game = PWBLevel(withName: name, startFrom: startFrom, endWith: goal, withOperations: ops)
+    } catch
+    {
+        print("Could not construct /(name)")
+    }
+    return game
+}
 
 
 

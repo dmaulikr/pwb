@@ -21,7 +21,8 @@ class TrainingScene: SKScene {
         TrainingScene(fileNamed: "Training6"),
         TrainingScene(fileNamed: "Training7"),
         TrainingScene(fileNamed: "Training8"),
-        TrainingScene(fileNamed: "Training9")
+        TrainingScene(fileNamed: "Training9"),
+        TrainingScene(fileNamed: "Training10")
     ]
     
     func setCurrentScene(index: Int)

@@ -113,7 +113,7 @@ class BaseLevelScene: SKScene {
         let botOp = SKLabelNode(fontNamed: Constants.problemFont)
         botOp.fontSize = 20
         botOp.fontColor = SKColor.darkGray
-        botOp.text = "ADD"
+        botOp.text = operation
         botOp.position = CGPoint(x: rect.frame.maxX + CGFloat(5), y: rect.frame.minY - CGFloat(5))
         botOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         botOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
@@ -132,7 +132,7 @@ class BaseLevelScene: SKScene {
         let rightOp = SKLabelNode(fontNamed: Constants.problemFont)
         rightOp.fontSize = 20
         rightOp.fontColor = SKColor.darkGray
-        rightOp.text = "OR"
+        rightOp.text = operation
         rightOp.position = CGPoint(x: rect.frame.maxX + CGFloat(5), y: rect.frame.maxY + CGFloat(5))
         rightOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         
@@ -150,7 +150,7 @@ class BaseLevelScene: SKScene {
         let leftOp = SKLabelNode(fontNamed: Constants.problemFont)
         leftOp.fontSize = 20
         leftOp.fontColor = SKColor.darkGray
-        leftOp.text = "NOT"
+        leftOp.text = operation
         leftOp.position = CGPoint(x: rect.frame.minX - CGFloat(5), y: rect.frame.minY - CGFloat(5))
         leftOp.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         leftOp.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
@@ -264,14 +264,16 @@ class BaseLevelScene: SKScene {
         if goal.topState != nil{
             topAnswer.text = goal.topState?.toStr()
             topAnswer.fontColor = SKColor.darkGray
-            topAnswer.fontSize = Constants.displayFontSize
+            // topAnswer.fontSize = Constants.displayFontSize
+            topAnswer.fontSize = determineFontSize(answerText: topAnswer.text)
             topAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.maxY + Constants.answerLabelOffset))
             self.addChild(topAnswer)
         }
         if goal.bottomState != nil{
             botAnswer.text = goal.bottomState?.toStr()
             botAnswer.fontColor = SKColor.darkGray
-            botAnswer.fontSize = Constants.displayFontSize
+            // botAnswer.fontSize = Constants.displayFontSize
+            botAnswer.fontSize = determineFontSize(answerText: botAnswer.text)
             botAnswer.position = CGPoint(x: frame.midX, y: (rect.frame.minY - Constants.answerLabelOffset))
             botAnswer.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
             self.addChild(botAnswer)
@@ -279,7 +281,8 @@ class BaseLevelScene: SKScene {
         if goal.rightState != nil{
             rightAnswer.text = goal.rightState?.toStr()
             rightAnswer.fontColor = SKColor.darkGray
-            rightAnswer.fontSize = Constants.displayFontSize
+            // rightAnswer.fontSize = Constants.displayFontSize
+            rightAnswer.fontSize = determineFontSize(answerText: rightAnswer.text)
             rightAnswer.position = CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
             rightAnswer.zRotation = Constants.rotate45degClock// Constants.rotate45degCounter
             self.addChild(rightAnswer)
@@ -287,7 +290,8 @@ class BaseLevelScene: SKScene {
         if goal.leftState != nil{
             leftAnswer.text = goal.leftState?.toStr()
             leftAnswer.fontColor = SKColor.darkGray
-            leftAnswer.fontSize = Constants.displayFontSize
+            // leftAnswer.fontSize = Constants.displayFontSize
+            leftAnswer.fontSize = determineFontSize(answerText: leftAnswer.text)
             leftAnswer.position = CGPoint(x: frame.midX - (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY) // CGPoint(x: frame.midX + (rect.frame.size.width * Constants.answerWidthOffset), y: frame.midY)
             leftAnswer.zRotation = Constants.rotate45degCounter// Constants.rotate45degClock
             self.addChild(leftAnswer)
@@ -302,6 +306,19 @@ class BaseLevelScene: SKScene {
             self.addNextLevelLabel()
         }
         // self.resetBits()
+    }
+    
+    private func determineFontSize(answerText: String?) -> CGFloat
+    {
+        if let text = answerText
+        {
+            if text.characters.count > (game.state?.currentState[0].toStr().characters.count)! // holy shit LOL
+            {
+                // reduce font size
+                return Constants.displayFontSize - CGFloat(10)
+            }
+        }
+        return Constants.displayFontSize
     }
     
     // this functionality will be moved to each individual level scene class later
