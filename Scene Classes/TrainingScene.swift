@@ -10,24 +10,18 @@ import SpriteKit
 
 class TrainingScene: SKScene {
     
+    var prefix = "Training"
+    
     var currentScene = 0
     
-    lazy var scenes: [TrainingScene?] = [
-        TrainingScene(fileNamed: "Training1"),
-        TrainingScene(fileNamed: "Training2"),
-        TrainingScene(fileNamed: "Training3"),
-        TrainingScene(fileNamed: "Training4"),
-        TrainingScene(fileNamed: "Training5"),
-        TrainingScene(fileNamed: "Training6"),
-        TrainingScene(fileNamed: "Training7"),
-        TrainingScene(fileNamed: "Training8"),
-        TrainingScene(fileNamed: "Training9"),
-        TrainingScene(fileNamed: "Training10")
-    ]
     
     func setCurrentScene(index: Int)
     {
         currentScene = index
+    }
+    
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -47,33 +41,43 @@ class TrainingScene: SKScene {
             else if nodeName == "back"
             {
                 let prevScene = currentScene - 1
-                if prevScene >= 0
+                if prevScene > 0
                 {
-                    if let scene = scenes[prevScene]
+                    let prevSceneName = prefix + String(prevScene)
+                    if let scene = TrainingScene(fileNamed: prevSceneName)
                     {
                         scene.setCurrentScene(index: prevScene)
-                        scene.scaleMode = .resizeFill
+                        // scene.scaleMode = .resizeFill
                         scene.backgroundColor = UIColor.white
-                        view!.presentScene(scene, transition: SKTransition.fade(with: SKColor.white, duration: TimeInterval(0.85)))
+                        // let fadeTransition = SKTransition.fade(with: SKColor.white, duration: TimeInterval(0.5))
+                        // view!.presentScene(scene, transition: fadeTransition)
+                        self.scene?.view?.presentScene(scene)
+                        // view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.85)))
                     }
                 }
             }
             else
             {
                 let nextScene = currentScene + 1
-                    if nextScene < scenes.count
+                    if nextScene <= 10
                     {
-                        if let scene = scenes[nextScene]
+                        let nextSceneName = prefix + String(nextScene)
+                        if let scene = TrainingScene(fileNamed: nextSceneName)
                         {
                             scene.setCurrentScene(index: nextScene)
-                            scene.scaleMode = .resizeFill
+                           // scene.scaleMode = .resizeFill
                             scene.backgroundColor = UIColor.white
-                            view!.presentScene(scene, transition: SKTransition.fade(with: SKColor.white, duration: TimeInterval(0.85)))
+                            // let fadeTransition = SKTransition.fade(with: SKColor.white, duration: TimeInterval(0.5))
+                            self.scene?.view?.presentScene(scene)
+                            // view!.presentScene(scene, transition: fadeTransition)
+                            // view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.right, duration: TimeInterval(0.85)))
                         }
                 }
             }
             
         }
     }
+    
+    // deinit{ print("TrainingScene\(currentScene) deinit") }
 
 }   // class

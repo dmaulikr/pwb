@@ -28,6 +28,7 @@ class PackSelectionScene: SKScene {
             {
                 if let scene = TrainingScene(fileNamed: "Training1")
                 {
+                    scene.setCurrentScene(index: 1)
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white
                     view!.presentScene(scene, transition: SKTransition.moveIn(with: SKTransitionDirection.down, duration: TimeInterval(0.55)))
