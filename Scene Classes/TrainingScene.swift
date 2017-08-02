@@ -33,6 +33,7 @@ class TrainingScene: SKScene {
             {
                 if let scene = PackSelectionScene(fileNamed: "LevelPack")
                 {
+                    scene.checkUnlocks()
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white
                     view!.presentScene(scene, transition: SKTransition.reveal(with: SKTransitionDirection.down, duration: TimeInterval(0.85)))

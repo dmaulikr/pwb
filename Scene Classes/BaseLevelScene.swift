@@ -23,9 +23,11 @@ struct Constants
     static let problemFont = "CourierNewPSMT"
     static let answerFont = "CourierNewPSMT"//"Helvetica Neue Thin"
     static let displayFontSize = CGFloat(55)
+
 }
 
 import SpriteKit
+import Foundation
 
 class BaseLevelScene: SKScene {
     
@@ -304,8 +306,22 @@ class BaseLevelScene: SKScene {
         if (game.state?.completed)!
         {
             self.addNextLevelLabel()
+            self.saveData()
         }
         // self.resetBits()
+    }
+    
+    private func saveData()
+    {
+        if let levelName = gameState?.levelName
+        {
+            SwiftyPlistManager.shared.save("completed", forKey: levelName, toPlistWithName: "PWBData") {(err) in
+                if err == nil {
+                    print("Key \(levelName) updated with value completed")
+                }
+            }
+        }
+        
     }
     
     private func determineFontSize(answerText: String?) -> CGFloat

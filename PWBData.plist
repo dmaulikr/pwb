@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Starter - 1</key>
+	<string>notcompleted</string>
+	<key>Starter - 2</key>
+	<string>notcompleted</string>
+	<key>Starter - 3</key>
+	<string>notcompleted</string>
+	<key>Starter - 4</key>
+	<string>notcompleted</string>
+	<key>Starter - 5</key>
+	<string>notcompleted</string>
+	<key>empiricalUnlocked</key>
+	<false/>
+</dict>
+</plist>
