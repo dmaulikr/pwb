@@ -32,10 +32,10 @@ class EmpiricalSelectionScene: SKScene {
                     switch nodeName
                     {
                     case "level2_1" : scene = Level2_1Scene(fileNamed: "LevelScene")
-                    //case "level2_2" : scene = Level1_2Scene(fileNamed: "LevelScene")
-                    //case "level2_3" : scene = Level1_3Scene(fileNamed: "LevelScene")
-                    //case "level2_4" : scene = Level1_4Scene(fileNamed: "LevelScene")
-                    //case "level2_5" : scene = Level1_5Scene(fileNamed: "LevelScene")
+                    case "level2_2" : scene = Level2_2Scene(fileNamed: "LevelScene")
+                    case "level2_3" : scene = Level2_3Scene(fileNamed: "LevelScene")
+                    case "level2_4" : scene = Level2_4Scene(fileNamed: "LevelScene")
+                    case "level2_5" : scene = Level2_5Scene(fileNamed: "LevelScene")
                     default : ()
                     }
                     

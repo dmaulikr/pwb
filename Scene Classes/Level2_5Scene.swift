@@ -1,21 +1,21 @@
 //
-//  Level2_1Scene.swift
+//  Level2_5Scene.swift
 //  PWB
 //
-//  Created by Nicholas Wei on 8/1/17.
+//  Created by Nicholas Wei on 8/3/17.
 //  Copyright © 2017 Nicholas Wei. All rights reserved.
 //
 
 import SpriteKit
 
-class Level2_1Scene: BaseLevelScene {
+class Level2_5Scene: BaseLevelScene {
     
     override func didMove(to view: SKView)
     {
-        super.initLevel(fromLevel: constructEmpirical1()!)
+        super.initLevel(fromLevel: constructEmpirical5()!)
         super.didMove(to: view)
-        super.addDownArrowOperation(operation: "ADD")
-        super.addRightArrowOperation(operation: "XOR")
+        super.addDownArrowOperation(operation: "OR")
+        super.addLeftArrowOperation(operation: "XOR")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -27,7 +27,7 @@ class Level2_1Scene: BaseLevelScene {
         for touch in touches
         {
             let location = touch.location(in: self)
-            if atPoint(location).name == "back"
+            if atPoint(location).name == "back" || atPoint(location).name == "continue"
             {
                 if let scene = EmpiricalSelectionScene(fileNamed: "EmpiricalSelection")
                 {
@@ -40,15 +40,7 @@ class Level2_1Scene: BaseLevelScene {
             {
                 super.restartGame()
             }
-            else if atPoint(location).name == "continue"
-            {
-                if let scene = Level2_2Scene(fileNamed: "LevelScene")
-                {
-                    scene.scaleMode = .resizeFill
-                    scene.backgroundColor = UIColor.white
-                    view!.presentScene(scene, transition: SKTransition.push(with: SKTransitionDirection.up, duration: TimeInterval(0.85)))
-                }
-            }
         }
     }
-}   // class
+    
+} // class

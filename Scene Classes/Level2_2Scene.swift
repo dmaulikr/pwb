@@ -1,21 +1,22 @@
 //
-//  Level2_1Scene.swift
+//  Level2_2Scene.swift
 //  PWB
 //
-//  Created by Nicholas Wei on 8/1/17.
+//  Created by Nicholas Wei on 8/3/17.
 //  Copyright © 2017 Nicholas Wei. All rights reserved.
 //
 
 import SpriteKit
 
-class Level2_1Scene: BaseLevelScene {
+class Level2_2Scene: BaseLevelScene {
     
     override func didMove(to view: SKView)
     {
-        super.initLevel(fromLevel: constructEmpirical1()!)
+        super.initLevel(fromLevel: constructEmpirical2()!)
         super.didMove(to: view)
         super.addDownArrowOperation(operation: "ADD")
-        super.addRightArrowOperation(operation: "XOR")
+        super.addRightArrowOperation(operation: "AND")
+        super.addLeftArrowOperation(operation: "XOR")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -42,7 +43,7 @@ class Level2_1Scene: BaseLevelScene {
             }
             else if atPoint(location).name == "continue"
             {
-                if let scene = Level2_2Scene(fileNamed: "LevelScene")
+                if let scene = Level2_3Scene(fileNamed: "LevelScene")
                 {
                     scene.scaleMode = .resizeFill
                     scene.backgroundColor = UIColor.white
@@ -51,4 +52,4 @@ class Level2_1Scene: BaseLevelScene {
             }
         }
     }
-}   // class
+} // class

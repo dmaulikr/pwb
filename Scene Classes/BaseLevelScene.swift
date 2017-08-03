@@ -340,16 +340,11 @@ class BaseLevelScene: SKScene {
     // this functionality will be moved to each individual level scene class later
     private func addNextLevelLabel()
     {
-        if continueLabel == nil
-        {
-            continueLabel = SKLabelNode(fontNamed: Constants.displayFont)
-            self.addChild(continueLabel)
-        }
+        continueLabel = childNode(withName: "continue") as! SKLabelNode
         continueLabel.text = "Next Level"
-        continueLabel.fontSize = 30
+        continueLabel.fontSize = 25
         continueLabel.fontColor = SKColor.blue
-        continueLabel.position = CGPoint(x: rect.frame.width * CGFloat(1.5), y: frame.midY)
-        continueLabel.name = "continue"
+        // continueLabel.name = "continue"
     }
     
     func touchDown(atPoint pos : CGPoint) {
