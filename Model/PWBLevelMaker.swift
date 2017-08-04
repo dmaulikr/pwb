@@ -9,6 +9,42 @@
 
 import Foundation
 
+struct LevelInfo
+{
+    let name: String
+    let goal: EndState
+    let ops: DirectionOfOperations
+    let startFrom: [BitWrapper]
+}
+
+let levels = [
+    "starter1" : LevelInfo(name: "Starter - 1",
+                           goal: [ "bot" : BitWrapper(fromString: "1010", alreadyBinary: true),
+                                   "right" : BitWrapper(fromString: "10", alreadyBinary: true)],
+                           ops: ["down" : "add", "right" : "or"],
+                           startFrom: [ BitWrapper(fromString: "1000", alreadyBinary: true),
+                                        BitWrapper(fromString: "0100", alreadyBinary: true)])
+]
+
+func constructLevel(level: String) -> PWBLevel?
+{
+    var game: PWBLevel?
+    
+    do
+    {
+        if let info = levels[level]
+        {
+            try game = PWBLevel(withLevelInfo: info)
+        }
+    } catch
+    {
+        print("Could not construct \(level)")
+    }
+    
+    return game
+    
+}
+
 // Starter Pack
 
 func constructStarter1() -> PWBLevel?

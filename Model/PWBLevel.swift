@@ -68,6 +68,21 @@ class PWBLevel  // represents a "level" in the game, utilizes BitWrapper
         }
     }
     
+    init(withLevelInfo: LevelInfo) throws
+    {
+        name = withLevelInfo.name
+        startState = withLevelInfo.startFrom
+        guard withLevelInfo.startFrom.count > 1 else {
+            throw PWBLevelError.invalidInit(reason: "Must start with at least two BitWrappers in startFrom array")
+        }
+        guard readDesiredState(endState: withLevelInfo.goal) != withLevelInfo.goal.count else {
+            throw PWBLevelError.invalidInit(reason: "Bad EndState")
+        }
+        guard readOperationOrientation(withOps: withLevelInfo.ops) != withLevelInfo.ops.count else {
+            throw PWBLevelError.invalidInit(reason: "Bad Operation Orientations")
+        }
+    }
+    
     struct GameState    // represents the current state of the game with additional info
     {
         let levelName: String

@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Empirical - 5</key>
+	<string>notcompleted</string>
+	<key>Empirical - 4</key>
+	<string>notcompleted</string>
+	<key>Empirical - 3</key>
+	<string>notcompleted</string>
+	<key>Empirical - 2</key>
+	<string>notcompleted</string>
+	<key>Empirical - 1</key>
+	<string>notcompleted</string>
 	<key>Starter - 1</key>
 	<string>notcompleted</string>
 	<key>Starter - 2</key>
